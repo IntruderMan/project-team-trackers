@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Clock3, Moon, Plus, Search, Settings2, Sun, Trash2, Users, X, ClipboardList, Pencil, Upload, Image as ImageIcon, ShieldCheck, Key, Lock, Eye, LogOut } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Clock3, Moon, Plus, Search, Settings2, Sun, Trash2, Users, X, ClipboardList, Pencil, Upload, Image as ImageIcon, ShieldCheck, Key, Lock, Eye, LogOut, LayoutGrid, Table, Layers, Calendar } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -649,7 +649,7 @@ function DeliveryWorkspace({ modules, search, setSearch, onAdd, onEdit, onDelete
             <div className="hidden overflow-x-auto lg:block">
               <table className="w-full min-w-[1100px] text-sm">
                 <thead>
-                  <tr className="border-b border-border/40 bg-muted/10 text-left text-xs font-semibold text-muted-foreground">
+                  <tr className="border-b border-primary/30 bg-gradient-to-r from-primary/20 via-indigo-500/20 to-primary/15 text-left text-xs font-bold uppercase tracking-wider text-primary">
                     <th className="p-4 pl-6">Phase / milestone</th>
                     <th className="p-4">Module / deliverable</th>
                     <th className="p-4">Hours</th>
@@ -719,6 +719,14 @@ function DeliveryWorkspace({ modules, search, setSearch, onAdd, onEdit, onDelete
   )
 }
 
+function StatusBadge({ status }: { status: string }) {
+  return (
+    <Badge className="rounded-lg font-semibold shadow-xs" variant={status === 'Completed' ? 'default' : status === 'In Progress' ? 'secondary' : 'outline'}>
+      {status}
+    </Badge>
+  )
+}
+
 function TeamWorkspace({ members, leaveCount, onAdd, onEdit, onDelete, isAdmin }: { members: Member[]; leaveCount: Leave[]; onAdd: () => void; onEdit: (member: Member) => void; onDelete: (id: string) => void; isAdmin: boolean }) {
   return (
     <div className="flex flex-col gap-6">
@@ -785,14 +793,6 @@ function StatusField({ label, value, onChange }: { label: string; value: string;
         </SelectContent>
       </Select>
     </Field>
-  )
-}
-
-function StatusBadge({ status }: { status: string }) {
-  return (
-    <Badge className="rounded-lg font-semibold shadow-xs" variant={status === 'Completed' ? 'default' : status === 'In Progress' ? 'secondary' : 'outline'}>
-      {status}
-    </Badge>
   )
 }
 
